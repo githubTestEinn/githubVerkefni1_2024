@@ -15,11 +15,15 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
+    socket.emit('chooseName');
+    socket.on('chooseName', (userName) => {
+        socket.userName = userName;
+    });
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
     socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
+        io.emit('chat message', socket.userName+' skrifaði: '+msg);
     });
 });
 

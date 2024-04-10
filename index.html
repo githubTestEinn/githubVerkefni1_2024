@@ -38,6 +38,11 @@
             }
         });
 
+        socket.on('chooseName', () => {
+          let userName = prompt("Veldu þér notandanafn. ")
+          socket.emit('chooseName', userName);
+        });
+
         socket.on('chat message', (msg) => {
             const item = document.createElement('li');
             item.textContent = msg;
